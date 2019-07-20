@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+#include <conio.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -54,6 +56,17 @@ void Draw()
             if (j == 0)
                 cout <<"#";
 
+            //display the head
+            if (x==j && y==i)
+
+                cout << "o";
+
+            // display the fruit
+
+            else if (fruitX == j && fruitY == i)
+                cout << "*";
+
+            else
                 cout << " ";
             if (j == width-1)
                 cout << "#";
@@ -66,18 +79,87 @@ void Draw()
         cout << "#" ;
     cout<<endl;
 
+    //display score
+    cout<< "Score : " << score<<endl;
+
 
 
 }
 
 void Input()
 {
+    if (_kbhit())
+    {
 
+        //leyboard control input
+        switch (_getch())
+        {
+        case 'q':
+            dir = LEFT;
+            break;
+        case 'z':
+            dir = UP;
+            break;
+        case 's':
+            dir = DOWN;
+            break;
+        case 'd':
+            dir = RIGHT;
+            break;
+        case 'x':
+            gameOver = true;
+            break;
+        default :
+            break;
+        }
+    }
 }
 
 void logic()
 {
 
+    // movement management
+    switch  (dir)
+    {
+    case DOWN :
+
+        if (y<height-1)
+            y++;
+        break;
+
+    case UP:
+        if (y>0)
+            y--;
+        break;
+
+    case LEFT:
+        if (x>0)
+            x--;
+        break;
+
+    case RIGHT:
+        if (x<width-1)
+            x++;
+        break;
+    default :
+        break;
+    }
+
+    // if the snake hits the wall
+    //if (x == width || y =z= height || x == 0 || y == 0)
+    //    gameOver = true;
+
+    //if the snake eats a fruit
+
+
+    // score display and new fruit apparition
+    if (x==fruitX && y==fruitY)
+    {
+        score =+ 10;
+        fruitX = rand()%width;
+        fruitY = rand()%height;
+
+    }
 }
 
 int main()
@@ -89,6 +171,8 @@ int main()
         Draw();
         Input();
         logic();
+
+        Sleep(100);
 
     }
 

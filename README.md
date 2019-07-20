@@ -2,6 +2,9 @@
 
 simple c++ console snake game inspired by : https://www.youtube.com/watch?v=E_-lMZDi7Uw
 
-## version 0.1
+## version 0.2
 
-* added map display
+* added snake head
+* fruit
+* movement
+* score
