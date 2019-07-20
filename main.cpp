@@ -42,25 +42,31 @@ void Draw()
     // ======== DRAW MAP ========
 
     //display top border of map
-    for (int i =0; i< width; i++)
+    for (int i =0; i< width+2; i++)
         cout << "#" ;
     cout<<endl;
 
     for (int i = 0; i<height; i++)
     {
-        cout << "#";
+
         for (int j=0; j<width; j++)
         {
-            cout << " ";
+            if (j == 0)
+                cout <<"#";
+
+                cout << " ";
+            if (j == width-1)
+                cout << "#";
         }
-        cout << "#";
         cout<<endl;
     }
 
     //display bottom border
-    for (int i =0; i< width; i++)
+    for (int i =0; i< width+2; i++)
         cout << "#" ;
     cout<<endl;
+
+
 
 }
 
