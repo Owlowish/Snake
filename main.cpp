@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -18,7 +20,7 @@ void setup()
     gameOver = false;
     //snake is not moving
 
-    eDirection = STOP;
+    dir = STOP ;
     // center the snake on the map
     x = width/2;
     y = height/2;
@@ -26,11 +28,39 @@ void setup()
     // randomize fruit position
     fruitX = rand()%width;
     fruitY = rand()%height;
+
+    score = 0;
 }
 
 
 void Draw()
 {
+    //clear screen
+    system("cls");
+
+
+    // ======== DRAW MAP ========
+
+    //display top border of map
+    for (int i =0; i< width; i++)
+        cout << "#" ;
+    cout<<endl;
+
+    for (int i = 0; i<height; i++)
+    {
+        cout << "#";
+        for (int j=0; j<width; j++)
+        {
+            cout << " ";
+        }
+        cout << "#";
+        cout<<endl;
+    }
+
+    //display bottom border
+    for (int i =0; i< width; i++)
+        cout << "#" ;
+    cout<<endl;
 
 }
 
