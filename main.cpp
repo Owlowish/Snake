@@ -155,7 +155,7 @@ void logic()
     // score display and new fruit apparition
     if (x==fruitX && y==fruitY)
     {
-        score =+ 10;
+        score += 10;
         fruitX = rand()%width;
         fruitY = rand()%height;
 
