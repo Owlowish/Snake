@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
+#include<time.h>
 
 using namespace std;
 
@@ -14,6 +15,10 @@ const int height = 20;
 int x, y, fruitX, fruitY, score;
 enum eDirection {STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
+//arrays
+
+int tailx[100],taily[100];
+int ntail;
 
 
 // ===========  INITIALISATION ===========
@@ -21,6 +26,7 @@ void setup()
 {
     gameOver = false;
     //snake is not moving
+    srand(time(0));
 
     dir = STOP ;
     // center the snake on the map
@@ -64,10 +70,25 @@ void Draw()
             // display the fruit
 
             else if (fruitX == j && fruitY == i)
-                cout << "*";
+                cout << "F";
 
             else
-                cout << " ";
+            {
+                bool print = false;
+                for (int k = 0; k < ntail ; k++)
+                {
+
+                    if (tailx[k]== j && taily[k] == i)
+                    {
+                        cout << "o";
+                        print = true;
+                    }
+
+                }
+                    if(!print)
+                    cout << " ";
+
+            }
             if (j == width-1)
                 cout << "#";
         }
@@ -117,13 +138,40 @@ void Input()
 
 void logic()
 {
+    //remember previous coordinate
+    int prevx = tailx[0];
+    int prevy = taily[0];
+
+    int prev2x,prev2y;
+
+    tailx[0] = x;
+    taily[0] = y;
+
+    for (int i=1; i<ntail; i++)
+    {
+
+        //remember current position
+        prev2x = tailx[i];
+        prev2y = taily[i];
+
+        // change value
+
+        tailx[i] = prevx;
+        taily[i] = prevy;
+
+        prevx = tailx[i];
+        prevy = taily[i];
+
+    }
+
+
 
     // movement management
     switch  (dir)
     {
     case DOWN :
 
-        if (y<height-1)
+        if (y<height)
             y++;
         break;
 
@@ -138,7 +186,7 @@ void logic()
         break;
 
     case RIGHT:
-        if (x<width-1)
+        if (x<width)
             x++;
         break;
     default :
@@ -158,6 +206,7 @@ void logic()
         score += 10;
         fruitX = rand()%width;
         fruitY = rand()%height;
+        ntail++;
 
     }
 }
