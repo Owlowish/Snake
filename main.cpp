@@ -17,8 +17,8 @@ enum eDirection {STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
 //arrays
 
-int tailx[100],taily[100];
-int ntail;
+int tailx[50],taily[50];
+int ntail=3;
 
 
 // ===========  INITIALISATION ===========
@@ -78,7 +78,7 @@ void Draw()
                 for (int k = 0; k < ntail ; k++)
                 {
 
-                    if (tailx[k]== j && taily[k] == i)
+                    if (tailx[k]== j && taily[k] == i )
                     {
                         cout << "o";
                         print = true;
@@ -102,6 +102,10 @@ void Draw()
 
     //display score
     cout<< "Score : " << score<<endl;
+
+    //debug
+    cout << "ntail : " << ntail << endl ;
+    cout << "width : "  << width << endl ;
 
 
 
@@ -138,7 +142,7 @@ void Input()
 
 void logic()
 {
-    //remember previous coordinate
+    //remember previous position
     int prevx = tailx[0];
     int prevy = taily[0];
 
@@ -159,8 +163,10 @@ void logic()
         tailx[i] = prevx;
         taily[i] = prevy;
 
-        prevx = tailx[i];
-        prevy = taily[i];
+        prevx = prev2x;
+        prevy = prev2y;
+
+
 
     }
 
@@ -171,22 +177,22 @@ void logic()
     {
     case DOWN :
 
-        if (y<height)
+        if (y<=height)
             y++;
         break;
 
     case UP:
-        if (y>0)
+        if (y>=0)
             y--;
         break;
 
     case LEFT:
-        if (x>0)
+        if (x>=0)
             x--;
         break;
 
     case RIGHT:
-        if (x<width)
+        if (x<=width)
             x++;
         break;
     default :
